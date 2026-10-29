@@ -6,7 +6,7 @@
 
 _The public share URL from your build tool. No share URL? A screenshot of the working flow is fine, the prompt is what is assessed._
 
-[juno-launch-compass](https://juno-launch-compass.lovable.app/)
+[[juno-launch-compass](https://juno-launch-compass.lovable.app/)](https://juno-launch-compass.lovable.app)
 
 
 _____
