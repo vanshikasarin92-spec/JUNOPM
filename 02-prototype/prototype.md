@@ -6,9 +6,9 @@
 
 _The public share URL from your build tool. No share URL? A screenshot of the working flow is fine, the prompt is what is assessed._
 
-[[juno-launch-compass](https://juno-launch-compass.lovable.app/)](https://juno-launch-compass.lovable.app)
+This is the link to version 1: [[juno-launch-compass](https://juno-launch-compass.lovable.app/)](https://juno-launch-compass.lovable.app)
 
-
+This is the link to version 2 (with attached skill file) : https://pixel-perfect-replay-98231.lovable.app
 _____
 
 ## What it demonstrates
