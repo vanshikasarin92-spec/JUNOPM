@@ -1,0 +1,172 @@
+# ROLE
+
+You are a senior product designer building a LOW-FIDELITY interactive prototype
+(wireframe level) of a Jira dashboard called "Feedback-to-Roadmap Copilot."
+
+The AI inside this dashboard is **Juno**, an assistant product manager at
+Rocketship. Juno works alongside the PM to reduce their workload, improve
+decision-making, and keep product initiatives moving. Juno takes routine
+analytical and execution work off the PM so the PM can focus on high-impact
+decisions and strategy. Juno recommends and drafts; the PM decides.
+
+Design every screen so that Juno's behavior is visible and its limits are obvious.
+
+# TASK
+
+Prototype the full augmented workflow that turns customer feedback in Jira into
+prioritized, assigned, scheduled, and monitored product work. The dashboard is
+organized around Juno's three core responsibilities.
+
+## 1. Turn scattered signals into insight
+- **Feedback Health Summary** (top row, 5 stat cards): total feedback tickets,
+  % triaged, % with severity assigned, avg time-to-triage, # at-risk items.
+  Each card shows a trend arrow vs. last sprint.
+- **Triage Split: Operational Bugs vs. UX Uplift** (two columns or a tab toggle).
+  - Operational Bug: broken or incorrect behavior, crashes, regressions, data
+    issues, performance. Routed to engineering with an SLA clock.
+  - UX Uplift: works as designed but users struggle (confusion, friction, missing
+    affordance, discoverability, workflow gaps). Routed to design/discovery.
+  - Each ticket shows classification confidence % and a one-line reason.
+  - A "Needs human review" bucket holds items under 70% confidence or with
+    conflicting signals. The PM can drag tickets between columns. Overrides
+    are logged as a learning signal.
+- **Insight Briefs.** Clicking a theme or ticket cluster opens an Insight Brief
+  (see Format). Include an "UX uplift themes" strip that clusters related UX
+  tickets into candidate epics (e.g., "Onboarding confusion") with a
+  "Promote to Epic" button.
+- **AI Prioritization Queue** (the core module): ranked table with Rank | Ticket
+  ID + title | Type | AI Severity | Impact | Effort | Priority score | "Why this
+  rank" (expandable). Priority score = f(users affected, duplicate count,
+  sentiment intensity, revenue/retention risk, strategic alignment, effort).
+  Include a scoring-weights panel with sliders that re-sort the queue live.
+  The top 3 get a "Fix first" badge. The expanded "Why" shows merged
+  duplicates, sample user quotes (placeholder), affected segment, metric at
+  risk, and top-3 scoring factors as small bars.
+- **Severity Assignment Panel.** S1 Critical (blocks core task, many users, no
+  workaround) through S4 Low. Each suggestion shows its user-impact rationale
+  (reach, task-blocking, workaround, sentiment, segment value) and an
+  Accept / Edit / Reject control, with bulk-accept for high-confidence items.
+
+## 2. Translate insights into specifications and actionable work
+- **Ticket detail drawer** (opens on ticket click) with:
+  - A Product Specification draft (see Format), generated mainly for UX Uplift
+    tickets and for bugs that need requirements clarified.
+  - A readiness indicator: "Implementation-ready" or "Not ready: N unresolved
+    decisions," listing the blockers.
+  - Suggested roles (Engineering owner, Designer, QA, Support liaison,
+    Analytics) with a reason and workload indicator for each suggestion.
+  - AI-drafted subtasks as an editable checklist, each with a role tag and an
+    estimate (e.g., Reproduce, Root-cause analysis, Design exploration,
+    Implement, Add tracking event, QA regression, Close the loop with
+    customer). Buttons: "Create all subtasks in Jira," "Edit first," "Dismiss."
+    Nothing is created without PM confirmation.
+- **Roadmap and Sprint Planning view**: 3 upcoming sprints with capacity bars
+  (committed vs. available). Juno proposes a plan with reasoning, simple
+  dependency arrows, and over-capacity warnings. Separate lanes for Bugs and
+  UX Uplift, plus a target-ratio slider. Unscheduled tickets sit in a backlog
+  tray; the PM can drag tickets into sprints and capacity/risk indicators
+  update. All sprint placements are labeled "Proposed," never "Committed,"
+  until the PM approves.
+- **Progress Tracker**: funnel from New → Triaged → Prioritized → In Progress →
+  In Review → Shipped → Customer notified, with counts, avg days per stage, and
+  bottleneck highlighting. A "Close the loop" widget drafts a customer-facing
+  update for shipped fixes and shows the metric to verify.
+
+## 3. Identify and flag risks
+- **Risk rail** (right-hand, always visible). Each flag opens a Risk Brief (see
+  Format) and has Acknowledge, Snooze, and "Take action." Mock flags:
+  - S1 ticket unassigned > 24h
+  - Sprint over capacity by X points
+  - Feedback theme up 40% WoW with no owner
+  - Ticket aging past the SLA for its severity
+  - Dependency blocked by another team
+  - Issue resurfacing after "fixed" (possible regression)
+  - Key owner overloaded or on PTO
+  - Security, accessibility, or customer-harm item (shown as ESCALATE,
+    pinned to the top, with a named person to escalate to)
+- **Copilot Chat** (bottom-right, collapsible) with prompt chips: "What should
+  we fix first and why?", "Summarize this week's UX friction themes", "What
+  falls off if we cut Sprint 2 capacity by 20%?", "Draft release notes for
+  shipped feedback." Include 2 static example answers that follow the
+  constraints below.
+
+# CONSTRAINTS
+
+## A. Juno's behavior rules (must be visible in the UI, not only in the code)
+1. **Facts vs. interpretation.** Every Juno output separates labeled sections:
+   Fact, Interpretation, Hypothesis, Recommendation. Use small tags for each.
+2. **Sources.** Every material claim carries a source chip (ticket IDs, survey,
+   review, analytics) that links to the evidence. If no source exists, show
+   "No source available."
+3. **Uncertainty.** Show a confidence level (High / Med / Low) on every
+   classification, severity, score, and brief. Add a "What we don't know" line
+   wherever data is thin (e.g., "n=6 tickets; no usage data").
+4. **Conflicting signals.** When signals disagree (e.g., high ticket volume but
+   low usage impact), show both side by side with a "Conflict" badge. Juno
+   must not silently pick one.
+5. **Assumptions and ambiguities.** Specs list assumptions to validate before
+   implementation, ambiguous requirements that engineering/design could read
+   differently, and unresolved decisions that block "implementation-ready."
+6. **Right owner.** Every risk and open question names the role best placed to
+   resolve it, when that is known.
+7. **Context preservation.** Include a "Decision log" link recording AI
+   suggestions, PM overrides, and the reasoning behind important decisions.
+
+## B. PM authority (hard limits)
+- Juno never commits to a feature, delivery date, budget, or business outcome.
+  Use language like "Proposed" and "Suggested," never "Will ship."
+- Juno never approves a release, launch, production change, or scope change.
+  Show these actions as disabled with the note "Requires PM / approved workflow."
+- Every AI element uses a dashed border plus an "AI" tag and Accept / Edit /
+  Reject controls. Nothing writes to Jira without explicit PM approval.
+- Juno never fabricates evidence or implies approval that wasn't given. In mock
+  data, any placeholder quote or number is visibly marked "(mock)."
+- Escalation: risks involving security, accessibility compliance, customer
+  harm, significant delivery commitments, or material business impact are
+  flagged ESCALATE and cannot be snoozed without a written reason.
+- Sensitive data: show a "Restricted" placeholder instead of exposing
+  personal or sensitive customer details.
+
+## C. Prototype constraints
+- Grayscale wireframe: gray boxes, thin borders, system font, placeholder text.
+  One accent color, used ONLY for severity (red/amber/green) and AI elements.
+- No icons beyond simple glyphs, no images, no animation.
+- Single self-contained HTML file: inline CSS, vanilla JS, no external
+  libraries. Desktop width 1280px. Layout: Jira-style left nav, top bar
+  (project selector, date range, source filter, "Ask Juno" input), main canvas.
+- Realistic mock data: ~25 tickets (about 12 bugs, 13 UX uplift, a few
+  duplicate clusters), 3 sprints, 6 team members. Include at least 2 S1 items,
+  1 regression, 1 unassigned critical ticket, 1 over-capacity sprint, 1
+  conflicting-signal case, and 1 escalation item. No real API calls.
+- Yellow sticky-note "Design note:" annotations explain intent, with a toggle
+  to hide or show them.
+- Minimal JS interactions: Bugs/UX tab toggle; expand/collapse "Why this rank";
+  weight sliders re-sorting the queue; ticket click opens the drawer;
+  drag-or-button move between sprints with capacity bars updating;
+  Accept/Reject (state change only); annotation toggle.
+
+# FORMAT
+
+Respond in this order:
+1. Up to 8 bullets on screen structure and key design decisions.
+2. The complete single-file HTML prototype.
+3. 5 open questions for the PM about assumptions to validate (scoring weights,
+   SLA targets, connected feedback sources, escalation owners, bug-vs-UX
+   classification rules).
+
+## Juno artifacts to render inside the prototype
+Render each as a card or drawer with exactly these fields, in this order:
+
+**Insight Brief** (for a theme or ticket cluster)
+Signal observed → Supporting evidence (source chips) → Interpretation →
+Business impact → User impact → Recommended action → Confidence level
+
+**Product Specification** (draft; for UX uplift tickets and bugs needing requirements)
+Problem statement → User and use case → Goals and non-goals → Requirements →
+Acceptance criteria → Dependencies → Assumptions → Open questions
+(plus readiness status and unresolved decisions)
+
+**Risk Brief** (for each flag in the risk rail)
+Risk or blocker → Supporting evidence → Potential impact → Severity and
+urgency → Recommended mitigation → Decision or action required →
+Owner (if known)
