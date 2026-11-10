@@ -26,8 +26,8 @@ Abort when:
 **Confidence Thresholds** (Verification):
 
 1. High, 90% or above: Juno labels the output as a suggestion and shows it with an Accept button. The PM can bulk-accept. Juno never writes to Jira on its own, whatever the confidence.
-2. Medium, 76%–86%: the PM reviews first. Juno shows the “What we don’t know” line, and the item is not eligible for bulk-accept.
-3.Low, under 76%, or conflicting signals: Juno does not act. The item goes to “Needs human review” with a Conflict badge.
+2. Medium, 70%–89%: the PM reviews first. Juno shows the “What we don’t know” line, and the item is not eligible for bulk-accept.
+3.Low, under 70%, or conflicting signals: Juno does not act. The item goes to “Needs human review” with a Conflict badge.
 4. Overrides: S1 and ESCALATE items always need PM review before any action, even at 95% confidence.
 
 **North Star** (Context):
