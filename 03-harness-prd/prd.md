@@ -119,11 +119,12 @@ write	confirm
 send	auto for the PM only; blocked for anyone else
 
 **Justification:** _blast radius and recoverability for each non-obvious tier._
-read: low blast radius. Juno sees only what the PM can see, and customer identities are masked.
+read: Juno sees only what the PM can see, and customer identities are masked.
 draft: nothing leaves Juno. Every draft carries an AI tag, and the PM can reject it.
 write (confirm): subtasks, assignments and severity changes are visible to the whole team and trigger notifications. They are recoverable but cost trust, so the PM approves each one.
 send (PM only): the PM is the only recipient, so the blast radius is one person and a mistake costs one email. Juno de-duplicates alerts to avoid noise.
 Blocked: committing sprints, approving releases, messaging customers, and falsifying or implying approvals. Escalation items can’t be snoozed without a written reason.
+
 
 ## 06 Verification · AI Testing & Measurement
 
