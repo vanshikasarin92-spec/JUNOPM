@@ -108,10 +108,15 @@ A past Juno suggestion is not a PM decision unless the PM accepted it.
 
 | Side-effect class | Tier |
 |---|---|
-| read | _auto / confirm / blocked_ |
-| draft | _auto / confirm / blocked_ |
-| write | _auto / confirm / blocked_ |
-| send | _auto / confirm / blocked_ |
+| read | _auto |
+| draft | _auto |
+| write |  confirm  |
+| send |  blocked_ |
+
+read	auto
+draft	auto
+write	confirm
+send	auto for the PM only; blocked for anyone else
 
 **Justification:** _blast radius and recoverability for each non-obvious tier._
 read: low blast radius. Juno sees only what the PM can see, and customer identities are masked.
